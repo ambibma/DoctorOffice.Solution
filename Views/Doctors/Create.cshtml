@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorOffice.Models.Doctor
+
+<h4>Add a new item</h4>
+
+<p><strong>NOTE:</strong> You need to have at least one Doctor before you can add an item!</p>
+<p>Go to @Html.ActionLink("this page", "Create", "Doctor") to create a category.</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Specialty)
+  @Html.DropDownList("SpecialtyId")
+
+  <input type="submit" value="Add new doctor" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all Doctors", "Index")</p>

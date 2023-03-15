@@ -1,0 +1,26 @@
+/* img{
+  mix-blend-mode:color-dodge;
+} */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+  font-size: 20;
+  background-color: black;
+  color: white;
+  text-align: center;
+  cursor: url(https://cur.cursors-4u.net/cursor.png), auto !important;
+}
+
+
+div#footer {
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  padding:8px;
+  text-align: center;
+}
+
