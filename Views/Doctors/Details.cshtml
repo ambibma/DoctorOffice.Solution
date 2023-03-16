@@ -12,20 +12,25 @@
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This item does not have any tags yet!</p>
+  <p>This doctor does not have any patients yet!</p>
 }
 else
 {
-  <h4>This item has the following Patients:</h4>
-  <ul>
+  <h4 id=doctor-header>Click here to view patients:</h4>
+
+  <ul id=full-patient-list class=hidden>
     @foreach(DoctorPatient join in Model.JoinEntities)
     {
-      <li>Patient: @join.Patient.Name</li>
+      <li id=patientlist-@join.PatientId class=patient>Patient: @join.Patient.Name
       @using (Html.BeginForm("DeleteJoin", "Doctors"))
       {
         @Html.Hidden("joinId", @join.DoctorPatientId)
         <input type="submit" value="Delete"/>
       }
+      <div id=patientdetails-@join.PatientId class="hidden">
+        <p>appointment info here</p>
+      </div>
+      </li>
     }
   </ul>
 }
@@ -34,3 +39,17 @@ else
 <p>@Html.ActionLink("Edit Doctor or Specialty", "Edit", new { id = Model.DoctorId })</p>
 <p>@Html.ActionLink("Add a Patient", "AddPatient", new { id = Model.DoctorId })</p>
 <p>@Html.ActionLink("Delete Doctor", "Delete", new { id = Model.DoctorId })</p>
+
+<script type="text/javascript">
+  document.getElementById("doctor-header").addEventListener("click", e => {
+    document.getElementById("full-patient-list").classList.toggle("hidden");
+  });
+
+  document.querySelectorAll(".patient").forEach(element => {
+    element.addEventListener("click", e => {
+      let id = element.id.split('-')[1];
+      document.getElementById("patientdetails-" + id).classList.toggle("hidden");
+    });
+  });
+  
+  </script>

@@ -1,6 +1,7 @@
-/* img{
+img{
   mix-blend-mode:color-dodge;
-} */
+  /* width:100%; */
+}
 
 html,
 body {
@@ -8,10 +9,9 @@ body {
   padding: 0;
   font-family: "Arial";
   font-size: 20;
-  background-color: black;
+  background-color: lightgray;
   color: white;
   text-align: center;
-  cursor: url(https://cur.cursors-4u.net/cursor.png), auto !important;
 }
 
 
@@ -24,3 +24,10 @@ div#footer {
   text-align: center;
 }
 
+ul {
+  list-style-type: none;
+}
+
+.hidden {
+  display:none;
+}

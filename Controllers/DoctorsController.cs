@@ -89,7 +89,7 @@ namespace DoctorOffice.Controllers
     public ActionResult AddPatient(int id)
     {
       Doctor thisDoctor = _db.Doctors.FirstOrDefault(doctors => doctors.DoctorId == id);
-      ViewBag.PatientId = new SelectList(_db.Patients, "PatientId", "Title");
+      ViewBag.PatientId = new SelectList(_db.Patients, "PatientId", "Name");
       return View(thisDoctor);
     }
 

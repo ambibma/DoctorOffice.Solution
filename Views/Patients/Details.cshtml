@@ -9,6 +9,7 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
+
 @if(@Model.JoinEntities.Count == 0)
 {
   <p>This patient does not have a doctor</p>
@@ -24,12 +25,24 @@ else
     {
       @Html.Hidden("joinId", @join.DoctorPatientId)
       <input type="submit" value="Delete"/>
+      @if(@join.AppointmentDate == null)
+      {
+        <h4>You have no appointments</h4>
+      }
+      else
+      {
+        <h4>Your next appointment:</h4>
+        <p>@join.AppointmentDate</p>
+      }
     }
   }
   </ul>
 }
 
+
+
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Add a Doctor", "AddDoctor", new { id = Model.PatientId })</p>
 <p>@Html.ActionLink("Edit Patient", "Edit", new { id = Model.PatientId })</p>
 <p>@Html.ActionLink("Delete Patient", "Delete", new { id = Model.PatientId })</p>
+<p>@Html.ActionLink("Schedule Appointment", "Schedule", new { id = Model.PatientId})</p>

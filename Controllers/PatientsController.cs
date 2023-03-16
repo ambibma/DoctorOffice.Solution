@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+
 
 namespace DoctorOffice.Controllers
 {
@@ -53,9 +55,9 @@ namespace DoctorOffice.Controllers
     [HttpPost]
     public ActionResult AddDoctor(Patient patient, int doctorId)
     {
-      #nullable enable
+#nullable enable
       DoctorPatient? joinEntity = _db.DoctorPatients.FirstOrDefault(join => (join.DoctorId == doctorId && join.PatientId == patient.PatientId));
-      #nullable disable
+#nullable disable
       if (joinEntity == null && doctorId != 0)
       {
         _db.DoctorPatients.Add(new DoctorPatient() { DoctorId = doctorId, PatientId = patient.PatientId });
@@ -100,6 +102,23 @@ namespace DoctorOffice.Controllers
       _db.DoctorPatients.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Schedule(int id)
+    {
+      Patient thisPatient = _db.Patients.FirstOrDefault(patients => patients.PatientId == id);
+      ViewBag.DoctorId = new SelectList(_db.Doctors, "DoctorId", "Name");
+      return View(thisPatient);
+    }
+
+    [HttpPost]
+    public ActionResult Schedule(DateTime apptDate, int patientId, int doctorId)
+    {
+      DoctorPatient thisDoctorPatient = _db.DoctorPatients.FirstOrDefault(join => (join.DoctorId == doctorId && join.PatientId == patientId));
+      thisDoctorPatient.AppointmentDate = apptDate;
+      _db.DoctorPatients.Update(thisDoctorPatient);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = patientId});  
     }
   }
 }

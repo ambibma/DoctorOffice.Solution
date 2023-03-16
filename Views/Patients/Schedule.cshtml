@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Schedule an Appointment</h1>
+
+@model DoctorOffice.Models.Patient
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PatientId)
+
+    @Html.Label("Select a Doctor")
+    @Html.DropDownList("DoctorId")
+
+  <label for="orderDate">Pick a date:</label>
+  <input type="datetime-local" id="apptDate" name="apptDate" value="2018-06-12T19:30"
+       min="2018-06-07T00:00" max="2018-06-14T00:00" step="1800">
+
+  
+    <input type="submit" value="Save" />
+}

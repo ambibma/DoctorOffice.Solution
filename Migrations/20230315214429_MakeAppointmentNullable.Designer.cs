@@ -3,6 +3,7 @@ using System;
 using DoctorOffice.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorOffice.Migrations
 {
     [DbContext(typeof(DoctorOfficeContext))]
-    partial class DoctorOfficeContextModelSnapshot : ModelSnapshot
+    [Migration("20230315214429_MakeAppointmentNullable")]
+    partial class MakeAppointmentNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +46,6 @@ namespace DoctorOffice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("AppointmentDate")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
@@ -67,6 +66,9 @@ namespace DoctorOffice.Migrations
                     b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("Appointment")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
